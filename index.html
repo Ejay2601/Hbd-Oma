@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birthday-book</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('heart.jpg'); /* Add your background image here */
+            background-size: cover; /* Cover the entire page */
+            background-position: center; /* Center the background image */
+            background-repeat: no-repeat; /* Prevent the background from repeating */
+            background-color: #ffeef8; /* Light pink background as fallback */
+        }
+
+        header {
+            background-color: #ff3e3e; /* Bright red header */
+            color: white;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        header .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        header nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        header nav ul li {
+            margin: 0 15px;
+        }
+
+        header nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        main {
+            display: flex;
+            padding: 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .sidebar {
+            width: 20%;
+            padding: 10px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-right: 20px;
+        }
+
+        .feed {
+            width: 60%;
+            padding: 10px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile {
+            text-align: center;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .cover-photo {
+            width: 100%;
+            height: 200px; /* Cover photo height */
+            background-image: url('cover.jpg'); /* Placeholder for cover photo */
+            background-size: cover;
+            background-position: center;
+            border-radius: 8px;
+        }
+
+        .profile img {
+            width: 120px; /* Profile picture size */
+            height: 120px; /* Profile picture size */
+            border-radius: 50%; /* Circular profile picture */
+            margin-top: -60px; /* Overlap cover photo */
+            border: 4px solid white; /* White border around profile picture */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile h2 {
+            margin: 10px 0 5px;
+            font-size: 20px;
+            color: #d5006d; /* Pink color for name */
+        }
+
+        .profile p {
+            margin: 5px 0;
+            color: gray;
+        }
+
+        .post {
+            background-color: #ffeef8; /* Light pink for posts */
+            margin-bottom: 15px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .post img {
+            width: 250px; /* Set a smaller size for post images */
+            height: auto; /* Maintain aspect ratio */
+            border-radius: 5px;
+            margin-bottom: 10px;
+            cursor: pointer; /* Change cursor to pointer for clickable images */
+        }
+
+        .new-post {
+    margin-bottom: 10px;
+    padding: 8px; /* Reduced padding */
+    border: 1px solid #ff3e3e;
+    border-radius: 2px;
+    background-color: #fff;
+    font-size: 14px; /* Reduced font size */
+}
+
+textarea {
+    width: 95%;
+    height: 50px; /* Reduced height */
+    border: 1px solid #ff3e3e;
+    border-radius: 5px;
+    padding: 8px; /* Reduced padding */
+    resize: none;
+    font-size: 14px; /* Reduced font size */
+}
+
+        button {
+            background-color: #ff3e3e; /* Red button */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: #d5006d; /* Darker pink on hover */
+        }
+
+        footer {
+            background-color: #ffeef8; /* Light pink footer */
+            text-align: center;
+            padding: 10px;
+            margin-top: 20px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        /* Fullscreen overlay styles */
+        .fullscreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            display: none; /* Initially hidden */
+        }
+
+        .fullscreen img {
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .exit-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: white;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Gallery styles */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* Three columns */
+            gap: 10px; /* Gap between images */
+        }
+
+        .gallery img {
+            width: 100%; /* Full width of the column */
+            border-radius: 5px;
+            cursor: pointer; /* Change cursor to pointer for clickable images */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">Birthday-book</div>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Profile</a></li>
+                <li><a href="#">Messages</a></li>
+                <li><a href="#">Notifications</a></li>
+                <li><a href="#">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <div class="sidebar">
+            <div class="profile">
+                <div class="bg.jpg"></div> <!-- Cover photo -->
+                <img src="oma.jpg" alt="Profile Picture">
+                <h2>Maria Flordeliza O. Felicilda</h2>
+                <p>BIRTHDAY GIRL</p>
+                <p>Bio: A good and loving mother is the heart of the family, offering unconditional support and guidance.</p>
+            </div>
+        </div>
+        
+        <div class="feed">
+            <div class="new-post">
+                <h3>Add New Post</h3>
+                <textarea placeholder="What's on your mind?"></textarea>
+                <input type="file" accept="image/*" placeholder="Add Image">
+                <input type="file" accept="video/*" placeholder="Add Video">
+                <button>Post</button>
+            </div>
+            <h2>News Feed</h2>
+            <div class="post">
+                <h3>Elijah Felicilda</h3>
+                <p>🎉 Happy Birthday to my most amazing mom! 🎂 Your love, strength, and support mean everything to me. Thank you for being my guiding light and my biggest cheerleader. I hope this special day brings you as much joy as you give to everyone around you. I love you more than words can say! 💖</p>
+                <img src="me and you.jpg" alt="Me and You" onclick="openFullscreen(this)"> <!-- Open full screen on click -->
+                <img src="bg.jpg" alt="Background Image" onclick="openFullscreen(this)"> <!-- Open full screen on click -->
+            </div>
+            <div class="post">
+                <h3>Elijah Felicilda</h3>
+                <p>🌟 Happy Birthday, Oma! 🌟
+
+                    On this special day, I want you to know how much you mean to me. Your strength and sacrifices as a solo parent inspire me every day. Even though we’re miles apart, your love reaches me no matter the distance. Thank you for working so hard to give me a better life. I hope your day is filled with joy, love, and everything you deserve. Can’t wait to celebrate together soon!
+                    
+                    I love you to the moon and back! ❤️
+                    
+                    .</p>
+                    <img src="bestmom.jpg" alt="Me and You" onclick="openFullscreen(this)"> <!-- Open full screen on click -->
+                <img src="you and me.jpg" alt="Background Image" onclick="openFullscreen(this)"> <!-- Open full screen on click -->
+            </div>
+        </div>
+        
+        <div class="sidebar">
+            <h2>Gallery</h2>
+            <div class="gallery">
+                <img src="pic1.jpg" alt="Gallery Image 1" onclick="openFullscreen(this)">
+                <img src="pic2.jpg" alt="Gallery Image 2" onclick="openFullscreen(this)">
+                <img src="pic3.jpg" alt="Gallery Image 3" onclick="openFullscreen(this)">
+                <img src="pic4.jpg" alt="Gallery Image 4" onclick="openFullscreen(this)">
+                <img src="pic5.jpg" alt="Gallery Image 5" onclick="openFullscreen(this)">
+                <img src="pic6.jpg" alt="Gallery Image 6" onclick="openFullscreen(this)">
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <p>&copy; 2024 Birthday-book</p>
+    </footer>
+
+    <!-- Fullscreen Overlay -->
+    <div class="fullscreen" id="fullscreenOverlay" onclick="closeFullscreen()">
+        <button class="exit-button" onclick="closeFullscreen()">✖</button>
+        <img id="fullscreenImage" src="" alt="Fullscreen Image">
+    </div>
+
+    <script>
+        function openFullscreen(img) {
+            const overlay = document.getElementById('fullscreenOverlay');
+            const fullscreenImage = document.getElementById('fullscreenImage');
+            fullscreenImage.src = img.src; // Set the src of the fullscreen image
+            overlay.style.display = 'flex'; // Show the overlay
+        }
+
+        function closeFullscreen() {
+            const overlay = document.getElementById('fullscreenOverlay');
+            overlay.style.display = 'none'; // Hide the overlay
+        }
+    </script>
+</body>
+</html>
